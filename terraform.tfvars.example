@@ -1,0 +1,22 @@
+# Network variables
+vpc_cidr              = 
+subnet_cidr           = 
+aws_availability_zone = 
+additional_cidrs      = 
+
+# Instance variables
+key_name            = 
+pub_key_file_path   = 
+pri_key_file_path   = 
+ssh_connection_user = 
+
+single_instance_type  = 
+
+# General variables
+aws_region      = 
+project_tag     = 
+owner_tag       = 
+environment_tag = 
+
+## This should be in another tfvars file, such as secret.tfvars
+secret_var = 
