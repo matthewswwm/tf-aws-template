@@ -33,12 +33,10 @@ rule "terraform_documented_variables" {
   enabled = true
 }
 
-# This should be enabled, but many modules being used have no version
 rule "terraform_module_pinned_source" {
-  enabled = false
+  enabled = true
 }
 
-# This should be enabled, but many modules being used have no version
 rule "terraform_module_version" {
   enabled = true
 }

@@ -32,7 +32,9 @@ Quick notes and reference on how to begin interacting with the resources can be 
 
 ## Timing
 
-Takes about ? mins to complete execution.
+Creation time: ? minutes
+
+Destruction time: ? minutes
 
 ## Notes
 
