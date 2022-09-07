@@ -3,7 +3,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = ">= 3.40.0"
+      version = ">= 4.28.0"
     }
   }
 }
@@ -20,15 +20,35 @@ provider "aws" {
   }
 }
 
+# Data section
+data "aws_ami" "amazon_linux" {
+  most_recent = true
+  owners      = ["amazon"] # Canonical
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm*x86_64-gp2"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+}
+
 # Network section
 module "aws_core_network" {
-  source = "git@github.com:matt-terraform-modules/terraform-aws-core-network.git?ref=v2.0.3"
+  source = "git@github.com:matt-terraform-modules/terraform-aws-core-network.git?ref=v3.0.1"
 
-  aws_core_vpc_cidr       = var.vpc_cidr
-  aws_core_subnet_cidr    = var.subnet_cidr
-  aws_core_az             = var.aws_availability_zone
-  additional_public_cidrs = var.additional_cidrs
-  map_public_ip           = true
+  aws_core_vpc_cidr    = var.vpc_cidr
+  aws_core_subnet_cidr = var.subnet_cidr
+  aws_core_az          = var.aws_availability_zone
+  map_public_ip        = true
 
   project_tag = var.project_tag
 }
@@ -70,6 +90,6 @@ resource "aws_instance" "single_instance" {
   }
 
   tags = {
-    Name = "${var.project_tag}_AWS_INSTANCE_${count.index + 1}"
+    Name = "${var.project_tag}_AWS_INSTANCE"
   }
 }

@@ -16,12 +16,6 @@ variable "aws_availability_zone" {
   type        = string
 }
 
-variable "additional_cidrs" {
-  description = "List of additional cidrs that need to be added to ingress rules. In format 1.2.3.4/32"
-  type        = list(any)
-  default     = ["212.250.145.34/32"]
-}
-
 # Instance variables
 variable "key_name" {
   description = "The name of the AWS key pair resource"
@@ -53,7 +47,7 @@ variable "single_instance_type" {
 variable "aws_region" {
   description = "AWS region to use"
   type        = string
-  default     = "ap-southeast-1"
+  default     = "eu-west-2"
 }
 
 variable "project_tag" {

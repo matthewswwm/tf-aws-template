@@ -2,7 +2,6 @@
 vpc_cidr              = 
 subnet_cidr           = 
 aws_availability_zone = 
-additional_cidrs      = 
 
 # Instance variables
 key_name            = 
