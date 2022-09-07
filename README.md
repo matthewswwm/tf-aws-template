@@ -1,12 +1,13 @@
 # tf-aws-template
 
-# Description
+## Description
 
 This repository is a template to create other Terraform AWS repositories following some standard best practices.
 
 ## Expected files
 
 The following files are expected:
+
 * `main.tf`
 * `variables.tf`
 * `outputs.tf`
@@ -22,7 +23,7 @@ The section below details the actual template for the README:
 
 # tf-aws-lowercase-name
 
-# Description
+## Description
 
 Provide a short description of the module.
 
@@ -40,17 +41,18 @@ Destruction time: ? minutes
 
 Any miscellaneous points or interesting observations can be added here.
 
-# Troubleshooting & debugging
+## Troubleshooting & debugging
 
 General troubleshooting guide information should be added here.
 
-## Issue 1
+### Issue 1
 
 Info and solutions (if any) for specific issues should have their own dedicated section.
 
-# To-do list
+## To-do list
 
 * Bulleted list of items that could be worked on.
 
 ## Requirements
+
 ...

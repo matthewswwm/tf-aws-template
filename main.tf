@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.0.0"
+  required_version = ">= 1.2.8"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -65,8 +65,9 @@ resource "aws_instance" "single_instance" {
   subnet_id              = module.aws_core_network.aws_subnet_id
   vpc_security_group_ids = [module.aws_core_network.aws_sg_id]
   key_name               = aws_key_pair.aws_keypair.key_name
+
   user_data = templatefile("${path.module}/templates/template.tftpl", {
-      tf_var = var.tf_var
+    tf_var = var.tf_var
   })
 
   connection {
@@ -78,7 +79,7 @@ resource "aws_instance" "single_instance" {
 
   # Copying entire directory
   provisioner "file" {
-    source = "${path.module}/scripts"
+    source      = "${path.module}/scripts"
     destination = "/tmp/"
   }
 
