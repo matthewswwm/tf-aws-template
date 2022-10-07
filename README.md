@@ -15,10 +15,6 @@ The following files are expected:
 * `.tflint.hcl`
     * [GitHub page](https://github.com/terraform-linters/tflint)
 
-## README
-
-To easily generate out the list of requirements, outputs, etc, use [terraform-docs](https://github.com/terraform-docs/terraform-docs) to create the documentation: `terraform-docs markdown --output-file README.md .`
-
 The section below details the actual template for the README:
 
 # tf-aws-lowercase-name
@@ -55,4 +51,5 @@ Info and solutions (if any) for specific issues should have their own dedicated 
 
 ## Requirements
 
+To easily generate out the list of requirements, outputs, etc, use [terraform-docs](https://github.com/terraform-docs/terraform-docs) to create the documentation: `terraform-docs markdown --output-file README.md .`
 ...
