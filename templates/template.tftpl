@@ -1,7 +1,15 @@
 #!/bin/bash
 #
-### template.sh
+### template.tftpl
 # Description of what the shellscript does
 # Tested on <OS>
 
-echo ${tf_var}
+set -e
+set -x
+
+echo "[INFO]: Starting script"
+
+echo "tf_var is " + ${tf_var}
+
+
+echo "[INFO]: Script completed"

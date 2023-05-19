@@ -1,9 +1,13 @@
 terraform {
-  required_version = ">= 1.3.6"
+  required_version = ">= 1.4.5"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.46.0"
+      version = "~> 4.64.0"
+    }
+    cloudinit = {
+      source  = "hashicorp/cloudinit"
+      version = "~> 2.3.2"
     }
   }
 }
@@ -41,9 +45,31 @@ data "aws_ami" "amazon_linux" {
   }
 }
 
+# Cloudinit section
+data "cloudinit_config" "instance_config" {
+  gzip          = false
+  base64_encode = false
+
+  part {
+    filename     = "01_ud_base.sh"
+    content_type = "text/x-shellscript"
+
+    content = file("${path.module}/scripts/template.sh")
+  }
+
+  part {
+    filename     = "02_template.sh"
+    content_type = "text/x-shellscript"
+
+    content = templatefile("${path.module}/templates/template.tftpl", {
+      tf_var = var.tf_var
+    })
+  }
+}
+
 # Network section
 module "aws_core_network" {
-  source = "git@github.com:matt-terraform-modules/terraform-aws-core-network.git?ref=v3.0.1"
+  source = "git@github.com:matt-terraform-modules/terraform-aws-core-network.git?ref=v3.0.3"
 
   aws_core_vpc_cidr    = var.vpc_cidr
   aws_core_subnet_cidr = var.subnet_cidr
@@ -65,10 +91,8 @@ resource "aws_instance" "single_instance" {
   subnet_id              = module.aws_core_network.aws_subnet_id
   vpc_security_group_ids = [module.aws_core_network.aws_sg_id]
   key_name               = aws_key_pair.aws_keypair.key_name
-
-  user_data = templatefile("${path.module}/templates/template.tftpl", {
-    tf_var = var.tf_var
-  })
+  user_data                   = data.cloudinit_config.instance_config.rendered
+  user_data_replace_on_change = true
 
   connection {
     host        = self.public_ip
