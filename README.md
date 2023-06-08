@@ -47,7 +47,7 @@ General troubleshooting guide information should be added here.
     * For simplicity, label the created scripts with numbers according to execution order
     * Take note that this is related to how cloud-init works specifically and even the content type can also affect the execution order
 * Note that you need sudo permissions
-* Find the logs in `var/log`, specifically `/var/log/cloud-init-output.log`
+* Find the logs in `/var/log`, specifically `/var/log/cloud-init-output.log`
 * Find the scripts in `/var/lib/cloud/instance/scripts`
 
 ### Issue 1
