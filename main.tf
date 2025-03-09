@@ -27,11 +27,11 @@ provider "aws" {
 # Data section
 data "aws_ami" "amazon_linux" {
   most_recent = true
-  owners      = ["amazon"] # Canonical
+  owners      = ["amazon"]
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm*x86_64-gp2"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 
   filter {
@@ -86,11 +86,11 @@ resource "aws_key_pair" "aws_keypair" {
 }
 
 resource "aws_instance" "single_instance" {
-  ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = var.single_instance_type
-  subnet_id              = module.aws_core_network.aws_subnet_id
-  vpc_security_group_ids = [module.aws_core_network.aws_sg_id]
-  key_name               = aws_key_pair.aws_keypair.key_name
+  ami                         = data.aws_ami.amazon_linux.id
+  instance_type               = var.single_instance_type
+  subnet_id                   = module.aws_core_network.aws_subnet_id
+  vpc_security_group_ids      = [module.aws_core_network.aws_sg_id]
+  key_name                    = aws_key_pair.aws_keypair.key_name
   user_data                   = data.cloudinit_config.instance_config.rendered
   user_data_replace_on_change = true
 
