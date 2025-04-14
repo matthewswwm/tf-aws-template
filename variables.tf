@@ -1,3 +1,10 @@
+# Template Variables
+variable "tf_var" {
+  description = "This variable is used in the terraform template"
+  type        = string
+  default     = "I am a variable"
+}
+
 # Network variables
 variable "vpc_cidr" {
   description = "The cidr block range of IP addresses for the virtual private cloud"
